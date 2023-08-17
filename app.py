@@ -5,9 +5,11 @@ app = Flask(__name__)
 
 msg = {
     'status': '200',
-    'msg'   : 'Hello Rasp' 
+    'msg'   : 'Hello Rasp',
+    'IP'    : str(socket.gethostbyname(socket.gethostname())) 
 }
 
+#usando o metodo http e não o https://
 @app.route('/teste', methods=['GET'])
 def teste_msg():
     print(f'IP: {socket.gethostbyname(socket.gethostname())}')
@@ -18,3 +20,5 @@ app.run(
     host  = 'localhost',
     debug = True
 )
+
+# flask run --host=192.168.56.1 --port=5000
