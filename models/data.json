@@ -1,0 +1,16 @@
+{
+    "img_params": {
+        "him"   : 23,
+        "hmax"  : 39,
+        "smax"  : 0.50,
+        "vmax"  : 0.57
+    },
+    "classes": {
+        "1"  : "Fruto Grande",
+        "2"  : "Fruto Médio",
+        "3"  : "Fruto Pequeno"
+    },
+    "focus" : 410.9084807515858,
+    "Zmax"  : 130.44713674653516,
+    "Focus": 410.9084807515858
+}

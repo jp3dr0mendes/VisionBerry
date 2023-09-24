@@ -1,27 +1,47 @@
 import cv2 as cv
 import numpy as np
 
-class Classifier:
-    def __init__(self):
-        pass
+import math
+
+from identifier import Identifier
+class Classifier(Identifier):
+    def __init__(self, image):
+        try:
+            while True:
+                frame, rect = self.start()
+                cv.imshow(frame, "imagem")
+                cv.waitKey(0)
+                cv.destroyAllWindows()
+
+                vol = self.volumn(rect)
+        except:
+            print("Classifier Error")
+
+    def pixel2mm(self,rect): 
+        realRect=np.array([
+        (2*self.img_params["Zmax"]*rect[1][0])/(2*self.img_params["Focus"]+rect[1][0]),
+        (2*self.img_params["Zmax"]*rect[1][1])/(2*self.img_params["Focus"]+rect[1][1]),
+        rect[2],
+        ])
+        return realRect
     
-    def get_contours(self,hmin: int, hmax: int, smax: int, vmax: int):
-        if self.cam.webcam.isOpened():
-            valid, frame = self.cam.webcam.read()
-            camShape=frame.shape
-            camHeight=camShape[0]
-            while valid:
-
-                valid, frame = self.cam.webcam.read() 
-
-                img_hsv =  cv.cvtColor(frame, cv.COLOR_BGR2HSV)
-
-                img_bin = np.array(((img_hsv[:,:,0]>hmin) & 
-                                    (img_hsv[:,:,0]<hmax) & 
-                                    (img_hsv[:,:,1]>smax) &
-                                    (img_hsv[:,:,2]>vmax)
-                                    )*255, dtype=np.uint8)
-
+    def volumn(self,rect):
+        realRect = self.pixel2mm(rect)
+        rx = realRect[0]/2
+        ry = realRect[1]/2
+        
+        if(ry>rx):
+            # a = ry
+            # b = rx
+            vol = (4*math.pi*ry*rx*rx)
+            return vol
+        else:
+            # a = rx
+            # b = ry
+            vol = (4*math.pi*rx*ry*rx)
+            return vol
+        # vol= (4*math.pi*a*b*b / 3)
+        # return vol 
 '''
 import numpy as np
 import cv2 as cv
