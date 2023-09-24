@@ -43,11 +43,11 @@ class Identifier:
             if(len(img_obj)):
 
                 contour  = img_obj[0]
-                img_rect = cv.minAreaRect(contours)
+                img_rect = cv.minAreaRect(contour)
                 img_box  = cv.boxPoints(img_rect)
                 img_box  = np.int0(img_box) 
             
-                cv.drawContours(self.image, contours,-1,(0, 255, 0),2,cv.LINE_AA)
+                cv.drawContours(self.image, contour,-1,(0, 255, 0),2,cv.LINE_AA)
                 cv.drawContours(self.image,[img_box],0,(0,0,255),2)
                 cv.imshow('Object', self.image)
 
