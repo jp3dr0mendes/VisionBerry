@@ -33,9 +33,9 @@ class TesteIdentifier:
                                                 (self.img_hsv[:,:,0] < self.img_params['hmax']) & 
                                                 (self.img_hsv[:,:,1] > self.img_params['smax']) &
                                                 (self.img_hsv[:,:,2] > self.img_params['vmax']))*255, dtype=np.uint8)
-            cv.imshow('Video', self.img_bin)
-            cv.waitKey(1)
-            cv.destroyAllWindows()
+            # cv.imshow('Video', self.img_bin)
+            # cv.waitKey(1)
+            # cv.destroyAllWindows()
             self.img_mop           = cv.morphologyEx(self.img_bin, cv.MORPH_CLOSE, cv.getStructuringElement(cv.MORPH_ELLIPSE, (10,10))).astype(np.uint8)
 
             image_contours,img_hierarchy = cv.findContours(self.img_mop, cv.RETR_EXTERNAL,cv.CHAIN_APPROX_SIMPLE)
@@ -64,12 +64,14 @@ class TesteIdentifier:
                     # print('Object Detected')
                     # yield self.image, contour
                     print('Object Detected')
+
+                cv.imshow('Video', self.image)                
                 
                 key = cv.waitKey(1)
                 if key == ord("q"):
                     break
             
-            cv.destroyAllWindows()
+            # cv.destroyAllWindows()
 
 TesteIdentifier()
 
