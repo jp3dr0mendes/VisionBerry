@@ -1,7 +1,7 @@
 {
     "img_params": {
-        "him"   : 23,
-        "hmax"  : 39,
+        "hmin"   : 20,
+        "hmax"  : 30,
         "smax"  : 0.50,
         "vmax"  : 0.57
     },
