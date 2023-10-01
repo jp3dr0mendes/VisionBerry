@@ -2,27 +2,36 @@ import cv2 as cv
 import numpy as np
 
 import math
+import json
 
-from identifier import Identifier
-class Classifier(Identifier):
-    def __init__(self, image):
-        try:
-            while True:
-                frame, rect = self.start()
-                cv.imshow(frame, "imagem")
-                cv.waitKey(0)
-                cv.destroyAllWindows()
+class Classifier:
+    # def __init__(self, image):
+    #     try:
+            
+    #     except:
+    #         print("Classifier Error")
 
-                vol = self.volumn(rect)
-        except:
-            print("Classifier Error")
+    def pixel2mm(self,rect):
 
-    def pixel2mm(self,rect): 
-        realRect=np.array([
-        (2*self.img_params["Zmax"]*rect[1][0])/(2*self.img_params["Focus"]+rect[1][0]),
-        (2*self.img_params["Zmax"]*rect[1][1])/(2*self.img_params["Focus"]+rect[1][1]),
-        rect[2],
-        ])
+        with open('data.json','r') as data:
+            self.params = json.load(data)
+        
+        # print("Degug 1")
+        # a = (2*self.img_params["zmax"]*int(rect[1][0][0]))/(2*self.img_params["focus"]+int(rect[1][0][0]))
+        # b = (2*self.img_params["zmax"]*int(rect[1][0][1]))/(2*self.img_params["focus"]+int(rect[1][0][1]))
+        # print(a)
+        # print(b)
+
+        # realRect = np.array([
+        # (2*self.img_params["zmax"]*int(rect[1][0][0]))/(2*self.img_params["focus"]+int(rect[1][0][0])),
+        # (2*self.img_params["zmax"]*int(rect[1][0][1]))/(2*self.img_params["focus"]+int(rect[1][0][1])),
+        # rect[2],
+        # ])
+
+        realRect = np.array([
+        (2*self.params["zmax"]*int(rect[1][0][0]))/(2*self.params["focus"]+int(rect[1][0][0])),
+        (2*self.params["zmax"]*int(rect[1][0][1]))/(2*self.params["focus"]+int(rect[1][0][1]))])
+
         return realRect
     
     def volumn(self,rect):
