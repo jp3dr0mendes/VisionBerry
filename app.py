@@ -10,10 +10,25 @@ msg = {
 }
 
 #usando o metodo http e não o https://
-@app.route('/teste', methods=['GET'])
-def teste_msg():
-    print(f'IP: {socket.gethostbyname(socket.gethostname())}')
-    return jsonify(msg)
+@app.route('/classifier', methods=['GET'])
+def return_class():
+    requisition = request.get_json()
+    data = requisition.get('request')
+
+    if data == None:
+        print('No Fruits')
+        return 'No Fruits'
+    else:
+        if data: 
+            print('Furto Adequado')
+            return 'Fruto Adequado'
+        else: 
+            print('Fruto Inadequado')
+            return 'Fruto Inadequado'
+
+# def teste_msg():
+#     print(f'IP: {socket.gethostbyname(socket.gethostname())}')
+#     return jsonify(msg)
 
 app.run(
     port  = 5000,
