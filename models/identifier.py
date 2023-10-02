@@ -61,8 +61,9 @@ class Identifier(Classifier):
             # print(self.volumn(contour))
             # print(self.classifier(contour))
 
-            data = {"request": self.classifier(contour)}
-            response = requests.get('http://192.168.56.1:5000/classifier', json=data)
+            data     = {"request": self.classifier(contour)}
+            # response = requests.get('http://192.168.56.1:5000/classifier', json=data)
+            response = requests.get('http://192.168.1.58:5000/classifier', json=data)
             print(response.content)                 
             
             #testando se o objeto está centralizado
@@ -77,7 +78,8 @@ class Identifier(Classifier):
             # print("No Object")
 
             data = {"request": None}
-            response = requests.get('http://192.168.56.1:5000/classifier', json=data)
+            # response = requests.get('http://192.168.56.1:5000/classifier', json=data)
+            response = requests.get('http://192.168.1.58:5000/classifier', json=data)
             print(response.content)
 
 Identifier()

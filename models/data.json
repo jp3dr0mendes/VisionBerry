@@ -1,6 +1,6 @@
 {
     "img_params": {
-        "hmin"  : 0,
+        "hmin"  : 20,
         "hmax"  : 40,
         "smax"  : 100,
         "vmax"  : 255
